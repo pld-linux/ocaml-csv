@@ -3,7 +3,7 @@ Summary:	A library for handling Comma Separated Value (CSV) File Format
 Summary(pl.UTF-8):	Biblioteka do obsługi plików CSV
 Name:		ocaml-csv
 Version:	1.1.6
-Release:	2
+Release:	3
 License:	LGPL + OCaml linking exception
 Group:		Libraries
 URL:		http://merjis.com/developers/csv
@@ -46,13 +46,16 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir}/ocaml/{csv,stublibs}}
 
 install csvtool $RPM_BUILD_ROOT%{_bindir}
-install *.cm[ixa]* *.a $RPM_BUILD_ROOT%{_libdir}/ocaml/csv
+install csv.cm[ixa]* csv.a $RPM_BUILD_ROOT%{_libdir}/ocaml/csv
 
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 cp -r test* example.ml $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 # META for findlib
 install -d $RPM_BUILD_ROOT%{_libdir}/ocaml/site-lib/csv
+echo 'version="%{version}"' >> META
+echo 'archive(byte)="csv.cma"' >> META
+echo 'archive(native)="csv.cmxa"' >> META
 echo 'directory = "+csv"' >> META
 install META $RPM_BUILD_ROOT%{_libdir}/ocaml/site-lib/csv
 
