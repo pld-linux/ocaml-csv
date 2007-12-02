@@ -1,6 +1,6 @@
 %define		ocaml_ver	1:3.10.0
-Summary:	A library managing dates and times
-Summary(pl.UTF-8):	Biblioteka do obsługi daty i czasu
+Summary:	A library for handling Comma Separated Value (CSV) File Format
+Summary(pl.UTF-8):	Biblioteka do obsługi plików CSV
 Name:		ocaml-csv
 Version:	1.1.6
 Release:	1
@@ -15,19 +15,25 @@ BuildRequires:	ocaml-findlib
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-The Calendar library is a library providing a set of operations
-over dates and times.
+This library can read and write CSV files, including all extensions
+used by Excel - eg. quotes, newlines, 8 bit characters in fields,
+"0 etc.
+The library comes with a handy command line tool called csvtool
+for handling CSV files from shell scripts.
 
 %package devel
-Summary:	A library managing dates and times
-Summary(pl.UTF-8):	Biblioteka do obsługi daty i czasu
+Summary:	A library for handling Comma Separated Value (CSV) File Format
+Summary(pl.UTF-8):	Biblioteka do obsługi plików CSV
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 %requires_eq	ocaml
 
 %description devel
-The Calendar library is a library providing a set of operations
-over dates and times.
+This library can read and write CSV files, including all extensions
+used by Excel - eg. quotes, newlines, 8 bit characters in fields,
+"0 etc.
+The library comes with a handy command line tool called csvtool
+for handling CSV files from shell scripts.
 
 %prep
 %setup -q
