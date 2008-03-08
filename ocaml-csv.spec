@@ -1,38 +1,59 @@
+# TODO: optflags
 %define		ocaml_ver	1:3.10.0
-Summary:	A library for handling Comma Separated Value (CSV) File Format
-Summary(pl.UTF-8):	Biblioteka do obsługi plików CSV
+Summary:	OCaml library for handling Comma Separated Value (CSV) File Format
+Summary(pl.UTF-8):	Biblioteka OCamla do obsługi plików CSV
 Name:		ocaml-csv
 Version:	1.1.6
 Release:	4
 License:	LGPL + OCaml linking exception
 Group:		Libraries
-URL:		http://merjis.com/developers/csv
 Source0:	http://merjis.com/_file/%{name}-%{version}.tar.gz
 # Source0-md5:	a91851438f9540b1a445087a4d409507
+URL:		http://merjis.com/developers/csv
 BuildRequires:	ocaml >= %{ocaml_ver}
 BuildRequires:	ocaml-findlib
 %requires_eq	ocaml-runtime
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-This library can read and write CSV files, including all extensions
-used by Excel - eg. quotes, newlines, 8 bit characters in fields,
-"0 etc.
+This OCaml library can read and write CSV files, including all
+extensions used by Excel - eg. quotes, newlines, 8 bit characters in
+fields, "0 etc.
+
 The library comes with a handy command line tool called csvtool
 for handling CSV files from shell scripts.
 
+%description -l pl.UTF-8
+Ta biblioteka OCamla odczytuje i zapisuje pliki CSV, wraz ze
+wszystkimi rozszerzeniami wykorzystywanymi przez Excela: cudzysłowami,
+znakami 8-bitowymi w polach, "0 itp.
+
+Do biblioteka załączone jest podręczne narzędzie działające z linii
+poleceń o nazwie csvtool, służące do obsługi plików CSV ze skryptów
+powłoki.
+
 %package devel
-Summary:	A library for handling Comma Separated Value (CSV) File Format
-Summary(pl.UTF-8):	Biblioteka do obsługi plików CSV
+Summary:	OCaml library for handling Comma Separated Value (CSV) File Format
+Summary(pl.UTF-8):	Biblioteka OCamla do obsługi plików CSV
 Group:		Development/Libraries
 %requires_eq	ocaml
 
 %description devel
-This library can read and write CSV files, including all extensions
-used by Excel - eg. quotes, newlines, 8 bit characters in fields,
-"0 etc.
+This OCaml library can read and write CSV files, including all
+extensions used by Excel - eg. quotes, newlines, 8 bit characters in
+fields, "0 etc.
+
 The library comes with a handy command line tool called csvtool
 for handling CSV files from shell scripts.
+
+%description devel -l pl.UTF-8
+Ta biblioteka OCamla odczytuje i zapisuje pliki CSV, wraz ze
+wszystkimi rozszerzeniami wykorzystywanymi przez Excela: cudzysłowami,
+znakami 8-bitowymi w polach, "0 itp.
+
+Do biblioteka załączone jest podręczne narzędzie działające z linii
+poleceń o nazwie csvtool, służące do obsługi plików CSV ze skryptów
+powłoki.
 
 %prep
 %setup -q
