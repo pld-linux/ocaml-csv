@@ -3,12 +3,12 @@
 Summary:	OCaml library for handling Comma Separated Value (CSV) File Format
 Summary(pl.UTF-8):	Biblioteka OCamla do obsługi plików CSV
 Name:		ocaml-csv
-Version:	1.1.6
-Release:	5
+Version:	1.1.7
+Release:	1
 License:	LGPL + OCaml linking exception
 Group:		Libraries
 Source0:	http://merjis.com/_file/%{name}-%{version}.tar.gz
-# Source0-md5:	a91851438f9540b1a445087a4d409507
+# Source0-md5:	3d0b5711c10b966686be1e1ee84e4aba
 URL:		http://merjis.com/developers/csv
 BuildRequires:	ocaml >= %{ocaml_ver}
 BuildRequires:	ocaml-findlib
