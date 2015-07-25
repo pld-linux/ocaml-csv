@@ -1,16 +1,25 @@
 # TODO: optflags
-%define		ocaml_ver	1:3.10.0
+#
+# Conditional build:
+%bcond_without	ocaml_opt	# skip building native optimized binaries (bytecode is always built)
+
+# not yet available on x32 (ocaml 4.02.1), remove when upstream will support it
+%ifnarch %{ix86} %{x8664} arm aarch64 ppc sparc sparcv9
+%undefine	with_ocaml_opt
+%endif
+
 Summary:	OCaml library for handling Comma Separated Value (CSV) File Format
 Summary(pl.UTF-8):	Biblioteka OCamla do obsługi plików CSV
 Name:		ocaml-csv
 Version:	1.1.7
-Release:	4
+Release:	5
 License:	LGPL + OCaml linking exception
 Group:		Libraries
 Source0:	http://merjis.com/_file/%{name}-%{version}.tar.gz
 # Source0-md5:	3d0b5711c10b966686be1e1ee84e4aba
+Patch0:		byte-only.patch
 URL:		http://merjis.com/developers/csv
-BuildRequires:	ocaml >= %{ocaml_ver}
+BuildRequires:	ocaml >= 1:3.10.0
 BuildRequires:	ocaml-findlib
 %requires_eq	ocaml-runtime
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -57,6 +66,9 @@ powłoki.
 
 %prep
 %setup -q
+%if %{without ocaml_opt}
+%patch0 -p1
+%endif
 
 %build
 %{__make}
@@ -67,7 +79,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir}/ocaml/{csv,stublibs}}
 
 install csvtool $RPM_BUILD_ROOT%{_bindir}
-install csv.cm[ixa]* csv.a $RPM_BUILD_ROOT%{_libdir}/ocaml/csv
+install csv.cm[ixa]* %{?with_ocaml_opt:csv.a} $RPM_BUILD_ROOT%{_libdir}/ocaml/csv
 
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 cp -r test* example.ml $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
@@ -85,7 +97,11 @@ rm -rf $RPM_BUILD_ROOT
 %doc *.mli
 %attr(755,root,root) %{_bindir}/*
 %dir %{_libdir}/ocaml/csv
-%{_libdir}/ocaml/csv/*.cm[ixa]*
+%{_libdir}/ocaml/csv/*.cma
+%{_libdir}/ocaml/csv/*.cm[ix]
+%if %{with ocaml_opt}
 %{_libdir}/ocaml/csv/*.a
+%{_libdir}/ocaml/csv/*.cmxa
+%endif
 %{_examplesdir}/%{name}-%{version}
 %{_libdir}/ocaml/site-lib/csv
